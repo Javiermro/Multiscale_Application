@@ -24,9 +24,15 @@ isMICRO(1).MICRO =1; FACT = 1; % For RVE analysis
 % isMICRO(1).epsilon_Macro0=FACT*[.01; 0; 0; .01]
 
 %% RVE_Struct_Hole_10 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-isMICRO(1).epsilon_Macro0=FACT*[0.2; 0; 0; 0; 0] ; %ne10
+% isMICRO(1).epsilon_Macro0=FACT*[0.2; 0; 0; 0; 0] ; %ne11
+% isMICRO(1).epsilon_Macro0=FACT*[-0.2; 0; 0; 0; 0] ; %ne10
+% isMICRO(1).epsilon_Macro0=FACT*[ 0; 0.2; 0; 0; 0] ; %ne11
 % isMICRO(1).epsilon_Macro0=FACT*[ 0; -0.2; 0; 0; 0] ; %ne10
-% isMICRO(1).epsilon_Macro0=FACT*[ 0; 0; 0; 0.4; 0] ; %ne9
+% isMICRO(1).epsilon_Macro0=FACT*[ 0; 0; 0; 0.2; 0.2] ; %ne8
+% isMICRO(1).epsilon_Macro0=FACT*[ 0; 0; 0;-0.2;-0.2] ; %ne8
+isMICRO(1).epsilon_Macro0=FACT*[0.2; 0.2; 0; 0; 0] ; %ne8
+isMICRO(1).epsilon_Macro0=FACT*[-0.1;-0.1; 0; 0; 0] ; %ne11
+
 %% RVE_Rigid_Hole_Periodico %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % isMICRO(1).epsilon_Macro0=FACT*[-0.23; 0; 0; 0; 0]; % Modo01   ne9 ne8 ne9
 % isMICRO(1).epsilon_Macro0=FACT*[0; 0.15; 0; 0; 0]; % Modo02  ne14 ne13 ne9

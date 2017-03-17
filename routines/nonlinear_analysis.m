@@ -62,6 +62,8 @@ end
 
 %% Iniciacion Matriz de Snapshots (JLM)
 if e_VG.isMICRO.MICRO && ~isempty(e_VG.Snap)
+    [dir,nomb] = fileparts(e_VG.fileCompleto);
+    
     nglT = 0 ;
     nset = e_VG.nSet ;
     ntens= e_VG.ntens ;  
@@ -97,9 +99,9 @@ if e_VG.isMICRO.MICRO && ~isempty(e_VG.Snap)
         ind_elem_set = [ind_elem_set ;[(ElemSet(ielem)-1)*npg*ntens + [1:1:npg*ntens]]'];  % Mind=[Mind ;[(ElemSet(ielem)-1)*4 + [1:1:4]]'];  
     end
     PointersToSet1(ind_elem_set,1) = false ;
-    PointersToSet2(ind_elem_set,1) = true ;
-
-    save('DomainPointers.mat','PointersToSet1','PointersToSet2')
+    PointersToSet2(ind_elem_set,1) = true ; 
+    
+    save([dir '/DomainPointers.mat'],'PointersToSet1','PointersToSet2')
     clear ElemSet PointersToSet1 PointersToSet1
 
 %     Estructura de datos para almacenar los snapshots
@@ -352,9 +354,8 @@ for istep = istepSave+1:np
 end
 
 %% Almacenamiento de las matrices de Snapshots
-[dir,nomb] = fileparts(e_VG.fileCompleto);
    
-save(['SNAPSHOTS_' nomb '.mat']  ,'-struct', 'Snapshots');
+save([dir '/SNAPSHOTS_' nomb '.mat']  ,'-struct', 'Snapshots');
 
 
 
