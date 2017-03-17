@@ -1,3 +1,13 @@
-mex -v -outdir .\material\LargeDeformations\PlasticityJ2 .\material\LargeDeformations\PlasticityJ2\f_RMapPlastJ2LD.f  .\material\LargeDeformations\PlasticityJ2\strl81ld_matlab.f .\material\LargeDeformations\PlasticityJ2\VECASI.f
+﻿mex -v -outdir .\material\LargeDeformations\PlasticityJ2 .\material\LargeDeformations\PlasticityJ2\f_RMapPlastJ2LD.f  .\material\LargeDeformations\PlasticityJ2\strl81ld_matlab.f .\material\LargeDeformations\PlasticityJ2\VECASI.f
 :: Debug
-mex -v -g -outdir .\material\LargeDeformations\PlasticityJ2 .\material\LargeDeformations\PlasticityJ2\f_RMapPlastJ2LD.f  .\material\LargeDeformations\PlasticityJ2\strl81ld_matlab.f .\material\LargeDeformations\PlasticityJ2\VECASI.f
+mex -v -g -outdir .\material\LargeDeformations\PlasticityJ2 .\material\LargeDeformations\PlasticityJ2\f_RMapPlastJ2LD.f .\material\LargeDeformations\PlasticityJ2\strl81ld_matlab.f .\material\LargeDeformations\PlasticityJ2\VECASI.f
+
+
+en LINUX CAMBIAR \ POR / y los sourse deben ser .F no .f
+
+mex -v -outdir ./material/LargeDeformations/PlasticityJ2  ./material/LargeDeformations/PlasticityJ2/f_RMapPlastJ2LD.F  ./material/LargeDeformations/PlasticityJ2/strl81ld_matlab.F  ./material/LargeDeformations/PlasticityJ2/VECASI.F 
+:: Debug
+mex -v -g -outdir ./material/LargeDeformations/PlasticityJ2 ./material/LargeDeformations/PlasticityJ2/f_RmapPlastJ2LD.F  ./material/LargeDeformations/PlasticityJ2/strl81ld_matlab.F  ./material/LargeDeformations/PlasticityJ2/VECASI.F 
+
+
+

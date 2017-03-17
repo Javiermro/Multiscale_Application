@@ -40,11 +40,11 @@ end
 
 % INICIALIZACION DE VARIABLES
 iter = 0;
-%Se crea acá para evitar estar creándola en cada iteración del newton. Principalmente para el caso del modelo
+%Se crea acï¿½ para evitar estar creï¿½ndola en cada iteraciï¿½n del newton. Principalmente para el caso del modelo
 %multiescala, donde hay que redifinir hvar como una estructura y no como una matriz como los otros casos. No
-%interesa sus valores, solo que esté definida para indexar correctamente los argumentos de salida.
+%interesa sus valores, solo que estï¿½ definida para indexar correctamente los argumentos de salida.
 %Ver si no cambiar la estructura para que se pueda indicar que se necesita como variable de estado (sigma,
-%eps, eps_fluct, etc.) por set. Esto evitaría tener matrices que no se necesita en ciertos sets. Otra es tener
+%eps, eps_fluct, etc.) por set. Esto evitarï¿½a tener matrices que no se necesita en ciertos sets. Otra es tener
 %variables que indiquen las dimensiones que se necesita de estas matrices, y en el caso que no se necesite que
 %sea cero.
 e_VarEst_new = f_eVarEstInic({'sigma','eps','eps_fluct','hvar','bodyForce'},e_DatSet,e_VG,0);
@@ -54,44 +54,44 @@ du_iter = zeros(ndoft,1);
 % Variables condensadas
 c_GdlCond = f_cVar_initIncNR(e_DatSet,e_VG,c_GdlCond);
 
-% MODIFICACIÓN DEL VALOR INICIAL
+% MODIFICACIï¿½N DEL VALOR INICIAL
 %Parece que es muy lento, considerando que en multiescala se lo llama repetida veces (una vez por
-%cada iteración macro). Ver si se calcula esta condición inicial, no utilizar la iteración cero y
-%forzar que siempre se haga una iteración más.
+%cada iteraciï¿½n macro). Ver si se calcula esta condiciï¿½n inicial, no utilizar la iteraciï¿½n cero y
+%forzar que siempre se haga una iteraciï¿½n mï¿½s.
 %ticIdVI = tic;
 %u = f_ValorInicial(xx,m_LinCond,dofl,doff,u,c_GdlCond,Fext,e_VarEst_new,e_VarEst_old,...
 %   e_VarAux,e_DatSet,DefMacro,e_VG);
-%fprintf('Tiempo de cálculo de valor inicial: %f\n',toc(ticIdVI));
+%fprintf('Tiempo de cï¿½lculo de valor inicial: %f\n',toc(ticIdVI));
 
 % ITERACION "0", EVALUACION DE LA FUERZA INTERNA
 e_VG.iter = iter;
-%Para forzar la iteración cero, se resuelva como un problema elástico, independiente de
+%Para forzar la iteraciï¿½n cero, se resuelva como un problema elï¿½stico, independiente de
 %como venga la variable e_VG.elast (luego en las siguientes iteraciones se recupera el valor 
-%impuesto en esa variable). Esta resuelve el caso que durante la parte elástica del problema, se
-%itere dos veces ya que el valor inicial fuerza un comportamiento inelástico ficticio.
-%Notar que lo se consigue es realizar en la interación 1 una avance elástico, es decir 
-%u(1) = u(0)+Du (u(i+1)=u(i)+Du), Du elástico (cualquiera sea el estado actual del problema,
+%impuesto en esa variable). Esta resuelve el caso que durante la parte elï¿½stica del problema, se
+%itere dos veces ya que el valor inicial fuerza un comportamiento inelï¿½stico ficticio.
+%Notar que lo se consigue es realizar en la interaciï¿½n 1 una avance elï¿½stico, es decir 
+%u(1) = u(0)+Du (u(i+1)=u(i)+Du), Du elï¿½stico (cualquiera sea el estado actual del problema,
 %que no corresponde al comportamiento de los modelos constitutivos elegidos) y que el residuo va
-%corresponder a ese comportamiento elástico asumido (es decir va ser incorrecto).
+%corresponder a ese comportamiento elï¿½stico asumido (es decir va ser incorrecto).
 % elastOrig = e_VG.elast;
 % e_VG.elast = 1;
 %
 %ticIDEnsam = tic;
 [KT,Fint,c_GdlCond,e_VarEst_new,e_VarAux] = f_Par_MatGlobales(xx,u,Du_step_new,c_GdlCond,e_DatSet,...
    e_VarEst_new,e_VarEst_old,e_VarAux,DefMacro,e_VG);
-%fprintf('Tiempo de ensamblaje Iteración 0: %f\n',toc(ticIDEnsam));
+%fprintf('Tiempo de ensamblaje Iteraciï¿½n 0: %f\n',toc(ticIDEnsam));
 % e_VG.elast = elastOrig;
 
 % ITERACION "0", COMPUTO DEL RESIDUO
 res = residuo(Fext,Fint,m_LinCond,dofl,doff,lambda);
 norm_res = norm([res;cell2mat((cellfun(@(x)reshape(x,[],1),c_GdlCond(:,2),'UniformOutPut',0)))],inf);
 
-% IMPRESION de interación 0
+% IMPRESION de interaciï¿½n 0
 if ~e_VG.esME
-   fprintf('ITERACIÓN: %2d ; |res| = %-8.3e (VALOR INICIAL)\n',iter,norm_res);
+   fprintf('ITERACION: %2d ; |res| = %-8.3e (VALOR INICIAL)\n',iter,norm_res);
 else
    fprintf('Problema micro: Elemento Macro %d: Punto gauss macro %d:\n',e_VG.iElemNumMacro,e_VG.iPGMacro);
-   fprintf('ITERACIÓN: %2d ; |res| = %-8.3e (VALOR INICIAL)\n',iter,norm_res);
+   fprintf('ITERACION: %2d ; |res| = %-8.3e (VALOR INICIAL)\n',iter,norm_res);
 end
 
 % INICIALIZACION DE VARIABLES PROPIAS DE ESQUEMA NEWTON-RAPHSON
@@ -112,7 +112,7 @@ while norm_res>tol_rel&&iter<max_iter||iter<1
    [du_iterl,dlambda] = incremental_disp(res,KT,Fext,m_LinCond,dofl,doff,Du_step_new,Du_step_old,e_VG);
    du_iter(dofl) = du_iterl;
    du_iter(doff) = m_LinCond*du_iterl;
-   %fprintf('Tiempo de resolución del sistema: %f\n',toc(ticIDResSist));
+   %fprintf('Tiempo de resoluciï¿½n del sistema: %f\n',toc(ticIDResSist));
    
    % INCREMENTO DE VARIABLES CONDENSADAS (gdl internos)
    c_GdlCond = f_cVar_IncrNR(du_iter,c_GdlCond,e_DatSet,e_VG);
@@ -146,7 +146,7 @@ while norm_res>tol_rel&&iter<max_iter||iter<1
    
    % IMPRESION POR PANTALLA DEL PROCESO DE CONVERGENCIA
     %if ~e_VG.esME
-      fprintf('ITERACIÓN: %2d ; |res| = %-8.3e\n',iter,norm_res);
+      fprintf('ITERACION: %2d ; |res| = %-8.3e\n',iter,norm_res);
     %end
     
 end
@@ -158,7 +158,7 @@ if iter==max_iter&&norm_res>tol_rel
    %En el debug se puede hacer que se active un breakpoint si usa un warning como mensaje.
    warning('off','backtrace')
    if e_VG.esME
-      %Para tener en cuenta que si está paralelizado la macroescala y no tiene carpeta compartidas, el newton
+      %Para tener en cuenta que si estï¿½ paralelizado la macroescala y no tiene carpeta compartidas, el newton
       %de la microescala no va encontrar donde guardar este archivo, por lo que en ese caso se desactiva.
       if e_VG.nLab==0||strcmp(e_VG.tipoMPool,'local')||e_VG.SharedFS
          nomArch = [e_VG.fileCompleto,'.pasNoConv'];

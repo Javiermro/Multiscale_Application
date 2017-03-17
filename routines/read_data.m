@@ -1068,46 +1068,71 @@ f_VerifNom(seccion,'END_LOAD',...
 %*******************************************************************************
 seccion = f_ProxString(fid);
 f_VerifNom(seccion,'BOUNDARY','Condiciones de borde: Se debe definir las condiciones de borde, "BOUNDARY".')
-% tipoBound = {{''}};
-% while(~strcmpi(tipoBound{1}{1},'BOUNDARY'))
-%    tipoBound = textscan(fid,'%s',1,'Delimiter',' :','MultipleDelimsAsOne',1,'CommentStyle','$');
-% end
-%tipoBound = tipoBound{2}{1};
+
 %Se extrae las opciones de las condiciones de borde
 c_ValVarCondBord = f_ExtrVar(fid);
-if numel(c_ValVarCondBord)==1
-   %En el caso que se ingrese solo el nombre de las condiciones de borde. En ese caso no se sigue la l�gica de
-   %nombre de variable=valorVariable.
-   s_nomCondBorde = c_ValVarCondBord{1};
-   matCBFull = false;
-else
-   s_nomCondBorde = f_ValStrVar('NOM',true,c_ValVarCondBord,'Variables de condiciones de borde');
-   matCBFull = f_ValDefecto(f_ValVar('MATCBFULL',false,c_ValVarCondBord,'Variables de condiciones de borde'),...
-      false,[],'MATCBFULL');
-end
-%Capaz se podr�a usar %c para leer por separado las direcciones que est�n restringidas
-%Se generaliza la lectura del valor de la restricci�n, se agrega una columna de opciones, que es optativo
+
+matCBFull = false;
+c_ValVarCondBord = f_ExtrVar(fid);
+s_nomCondBorde = c_ValVarCondBord{1};
+
+% if numel(c_ValVarCondBord)==1
+%    %En el caso que se ingrese solo el nombre de las condiciones de borde. En ese caso no se sigue la lógica de
+%    %nombre de variable=valorVariable.
+%    s_nomCondBorde = c_ValVarCondBord{1};
+%    matCBFull = false;
+% else
+%    s_nomCondBorde = f_ValStrVar('NOM',true,c_ValVarCondBord,'Variables de condiciones de borde');
+%    matCBFull = f_ValDefecto(f_ValVar('MATCBFULL',false,c_ValVarCondBord,'Variables de condiciones de borde'),...
+%       false,[],'MATCBFULL');
+% end
+
+%Capaz se podría usar %c para leer por separado las direcciones que están restringidas
+%Se generaliza la lectura del valor de la restricción, se agrega una columna de opciones, que es optativo
 %agregar en el archivo de datos. Esto permite agregar las coordenadas de la periodicidad en el caso de
 %problemas de un grado de libertad.
 %En el caso de poner la columna de opciones hay que poner un resultado en todas las filas.
-%Por ahora no se pone una opci�n por grado de libertad, igual, en el caso de que querer poner opciones
-%distintas para cada grado de libertad deber�a funcionar poner filas separadas para cada uno de ellos.
+%Por ahora no se pone una opción por grado de libertad, igual, en el caso de que querer poner opciones
+%distintas para cada grado de libertad debería funcionar poner filas separadas para cada uno de ellos.
 %formatBou = ['%f %f',repmat(' %f',1,ndn),repmat(' %s',1,ndn),'\n'];
-%Cambiar que lea todo string entre par�ntesis, as� se puede agregar espacios dentro de los par�ntesis.
-formatBou = ['%f %f',repmat(' %f',1,ndn),' %s\n'];
+%Cambiar que lea todo string entre paréntesis, así se puede agregar espacios dentro de los paréntesis.
+formatBou = ['%f %f',repmat(' %f',1,ndn),' %s']; 
+% formatBou = ['%f %f',repmat(' %f',1,ndn),' %s\n'];% en Linux no anda
 m_CondBord = textscan(fid,formatBou,'CollectOutput',true,'CommentStyle','$');
-%Se ordena los datos ingresados seg�n la lista de nodos, para asegurar que los �ndices de los
-%grados de libertad libre y fijos est�n bien calculados, y ordenados seg�n la matriz de rigidez
+
+%Se ordena los datos ingresados según la lista de nodos, para asegurar que los índices de los
+%grados de libertad libre y fijos estï¿½n bien calculados, y ordenados segï¿½n la matriz de rigidez
 %global.
 c_OpCondBord = m_CondBord{2};
 [m_CondBord,m_IndOrd] = sortrows(m_CondBord{1});
 c_OpCondBord = c_OpCondBord(m_IndOrd,:);
-%Se cambia la numeraci�n de los nodos a la interna.
+
+%Se cambia la numeración de los nodos a la interna.
 [m_CondBord(:,1),~] = find(bsxfun(@eq,in,m_CondBord(:,1)'));
+
 %Lectura de comando de fin de boundary
 seccion = f_ProxString(fid);
-f_VerifNom(seccion,'END_BOUNDARY',['Condiciones de Borde: El pr�ximo string a las ',...
+f_VerifNom(seccion,'END_BOUNDARY',['Condiciones de Borde: El próximo string a las ',...
    'condiciones de borde tiene que ser "END_BOUNDARY".'])
+
+%% JLM cambie esto
+% matCBFull = false;
+% c_ValVarCondBord = f_ExtrVar(fid);
+% s_nomCondBorde = c_ValVarCondBord{1};
+% formatBou = ['%f %f',repmat(' %f',1,ndn)];
+% % formatBou = ['%f %f',repmat(' %f',1,ndn),' %s'];
+% m_CondBord = textscan(fid,formatBou,'CollectOutput',true,'CommentStyle','$');
+% % c_OpCondBord = m_CondBord{2}; % JLM
+% c_OpCondBord = m_CondBord{1};
+% [m_CondBord,m_IndOrd] = sortrows(m_CondBord{1});
+% c_OpCondBord = c_OpCondBord(m_IndOrd,:);
+% %Se cambia la numeraci�n de los nodos a la interna.
+% [m_CondBord(:,1),~] = find(bsxfun(@eq,in,m_CondBord(:,1)'));
+% %Lectura de comando de fin de boundary
+% seccion = f_ProxString(fid);
+% f_VerifNom(seccion,'END_BOUNDARY',['Condiciones de Borde: El pr�ximo string a las ',...
+%    'condiciones de borde tiene que ser "END_BOUNDARY".'])
+%% fin cambios JLM
 
 %*******************************************************************************
 %* PARAMETROS DEL ALGORITMO NO-LINEAL                                          *
@@ -1140,7 +1165,7 @@ tolnr = f_ValVar('TOL_NEWTON',true,c_ValVarConv,['Estrategia: Datos de convergen
 % N�MERO DE ITERACIONES M�XIMAS
 %El valor por defecto es 50 iteraciones.
 iterMax = f_ValDefecto(f_ValVar('ITERMAX',false,c_ValVarConv,['Estrategia: Datos de convergencia: ',...
-   'Iteraciones m�ximas del esquema de newton global']),50,[],'ITERMAX');
+   'Iteraciones maximas del esquema de newton global']),50,[],'ITERMAX');
 
 
 % TOLERANCIA NEWTON CONSTITUTIVO
@@ -1149,7 +1174,7 @@ toldg = f_ValVar('TOL_CONST_MODEL',false,c_ValVarConv,['Estrategia: Datos de con
 
 % PARAMETROS BUSQUEDA LINEAL
 m_ParamBL = f_ValVar({'ETA_MIN','ETA_MAX','ETA_PAR','TOLER'},lsearch,c_ValVarConv,...
-   'Estrategia: B�squeda lineal: Par�metros');
+   'Estrategia: Busqueda lineal: Parametros');
 eta_min = m_ParamBL(1);
 eta_max = m_ParamBL(2);
 eta_par = m_ParamBL(3);

@@ -4,13 +4,15 @@
 clc; clear all; close all
 % ********* TESTS **********
 TEST_DATA(1).nLab = 1;
+main_example_path = '/home/javiermro/Projects/Examples'; 
+TEST_DATA(1).path_file= [main_example_path '/StructHole10/Mi_GD_J2_StructHole']; TEST_DATA(1).file = 'RVE_StructHole10.mfl' ; %'RVE_Hole05.mfl';%
 
 % TEST_DATA(1).path_file= 'C:/CIMNE/Codes/MultiScale_SantaFe/Examples/RVE_Struct_Hole_01/Mi_GD_J2'; TEST_DATA(1).file = 'RVE_Struct_Hole.mfl' ;
 % TEST_DATA(1).path_file= 'C:/CIMNE/Kratos/4ELEM_MICRO bbar'; TEST_DATA(1).file = 'meso_cell_RandIncPlastJ2.mfl';
 % TEST_DATA(1).path_file= 'C:/CIMNE/Codes/MultiScale_SantaFe/Examples/MS_Probeta01/MS_GD_J2_Prob01'; TEST_DATA(1).file = 'Macro.mfl';
 % TEST_DATA(1).path_file= 'C:/CIMNE/Codes/MultiScale_SantaFe/Examples/RVE_Alloy01/Mi_GD_J2_Alloy01';
 % TEST_DATA(1).path_file= 'C:/CIMNE/Codes/MultiScale_SantaFe/Examples/RVE_Hole_03/Mi_GD_J2_Hole'; TEST_DATA(1).file = 'RVE_Hole03.mfl'
-TEST_DATA(1).path_file= 'C:/CIMNE/Codes/MultiScale_SantaFe/Examples/RVE_Hole_05/Mi_GD_J2_Hole'; TEST_DATA(1).file = 'RVE_Hole05.mfl' ;
+% TEST_DATA(1).path_file= 'C:/CIMNE/Codes/MultiScale_SantaFe/Examples/RVE_Hole_05/Mi_GD_J2_Hole'; TEST_DATA(1).file = 'RVE_Hole05.mfl' ;
 % TEST_DATA(1).path_file= 'C:/CIMNE/Codes/MultiScale_SantaFe/Examples/RVE_RigidHole_05/Mi_GD_J2_RigidHole'; TEST_DATA(1).file = 'RVE_Hole05.mfl';
 % TEST_DATA(1).path_file= 'C:/CIMNE/Codes/MultiScale_SantaFe/Examples/RVE_RigidHole_04/Mi_GD_J2_RigidHole'; TEST_DATA(1).file = 'RVE_Hole04.mfl'
 % TEST_DATA(1).path_file= 'C:/CIMNE/Codes/MultiScale_SantaFe/Examples/RVE_RigidHole_03/Mi_GD_J2_RigidHole'; TEST_DATA(1).file = 'RVE_Hole03.mfl'
@@ -21,8 +23,8 @@ TEST_DATA(1).path_file= 'C:/CIMNE/Codes/MultiScale_SantaFe/Examples/RVE_Hole_05/
 isMICRO(1).MICRO =1; FACT = 1; % For RVE analysis
 % isMICRO(1).epsilon_Macro0=FACT*[.01; 0; 0; .01]
 
-%% RVE_Struct_Hole_01 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% isMICRO(1).epsilon_Macro0=FACT*[0.2; 0; 0; 0; 0] ; %ne10
+%% RVE_Struct_Hole_10 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+isMICRO(1).epsilon_Macro0=FACT*[0.2; 0; 0; 0; 0] ; %ne10
 % isMICRO(1).epsilon_Macro0=FACT*[ 0; -0.2; 0; 0; 0] ; %ne10
 % isMICRO(1).epsilon_Macro0=FACT*[ 0; 0; 0; 0.4; 0] ; %ne9
 %% RVE_Rigid_Hole_Periodico %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -46,7 +48,7 @@ isMICRO(1).MICRO =1; FACT = 1; % For RVE analysis
 % isMICRO(1).epsilon_Macro0=FACT*[-0.05; -0.05; 0; 0.0; 0.0]; % Modo08 ne25
 % isMICRO(1).epsilon_Macro0=FACT*[0.07; 0; 0; 0.1; 0]; % Modo17
 %% RVE_Hole05 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-isMICRO(1).epsilon_Macro0=FACT*[0.07; 0; 0; 0; 0]; % Modo01  ne22
+% isMICRO(1).epsilon_Macro0=FACT*[0.07; 0; 0; 0; 0]; % Modo01  ne22
 % isMICRO(1).epsilon_Macro0=FACT*[0; -0.1; 0; 0; 0]; % Modo02  ne16
 % isMICRO(1).epsilon_Macro0=FACT*[0; 0; 0; 0.25; 0]; % Modo03    ne12
 % isMICRO(1).epsilon_Macro0=FACT*[0.05; 0.05; 0; 0; 0]; % Modo04  ne25

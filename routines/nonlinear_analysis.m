@@ -168,7 +168,7 @@ if 0
    %fileCompletoTemp = e_VG.fileCompleto;
    load(fullfile(dirFile,'PasoSalvado'))
    %e_VG.fileCompleto = fileCompletoTemp;
-   fprintf('Se recuper� los valores de las variables del paso %d.\n',istepSave)
+   fprintf('Se recupera los valores de las variables del paso %d.\n',istepSave)
 end
 %Se indica cada cuánto se salva los pasos
 deltaPasoSave = 100;
