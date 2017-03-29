@@ -317,8 +317,9 @@ for istep = istepSave+1:np
       end
    end
    
-   Snapshots = SnapshotSave(Snapshots,istep,e_VarAux,e_VarEst_new,e_DatSet,e_VG,nglT) ;
-   
+   if e_VG.isMICRO.MICRO && ~isempty(e_VG.Snap)
+       Snapshots = SnapshotSave(Snapshots,istep,e_VarAux,e_VarEst_new,e_DatSet,e_VG,nglT) ;
+    end
    % Operaciones Constitutivas despu�s de la convergencia del Newton
    %Se coloca al final de todo, despu�s de la impresi�n de los resultados para que se imprima los
    %valores con los datos que se utilizaron para obtenerlos. Por ejemplo, que las tensiones que se
@@ -354,8 +355,10 @@ for istep = istepSave+1:np
 end
 
 %% Almacenamiento de las matrices de Snapshots
-   
-save([dir '/SNAPSHOTS_' nomb '.mat']  ,'-struct', 'Snapshots');
+
+if e_VG.isMICRO.MICRO && ~isempty(e_VG.Snap)   
+    save([dir '/SNAPSHOTS_' nomb '.mat']  ,'-struct', 'Snapshots');
+end
 
 
 
