@@ -111,7 +111,7 @@ end
 %Es importante la siguiente l�nea para que cuando se corta la ejecuci�n del programa antes de cerrar
 %todos los archivos.
 fclose all;
-clc
+% clc
 %p = pwd;
 p = fileparts(mfilename('fullpath'));
 addpath(genpath(p));
@@ -125,6 +125,7 @@ if ischar(file)&&ischar(path_file)
    ticIDLect = tic;
    [in,xx,m_SetElem,f,funbc,e_DatSet,e_VG] = read_data(file,path_file);
    fprintf('Tiempo de lectura y preproceso de datos: %f.\n',toc(ticIDLect));
+   
    % *************************************
    % * RESOLUCION DEL PROBLEMA NO LINEAL *
    % *************************************

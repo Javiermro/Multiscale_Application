@@ -1,14 +1,14 @@
 function [e_DatSet,e_VarEst_new,e_VarAux,m_DsigmaHomog,e_VG] = ...
        f_OperPosConv(u,xx,e_VarEst_new,e_VarEst_old,e_VarAux,e_DatSet,c_CT,KT,m_LinCond,dofl,doff,e_VG)
    
-   %Cálculos que se realizan después de la convergencia del newton. Generalmente son cálculos
-   %correspondiente a la parte explícita del modelo y que se utiliza en el paso siguiente.
-   %Esta función se coloca después de la impresión de resultados, ya que todo lo que se calcule en
-   %esta función se utiliza en el paso siguiente y por lo tanto no se utilizó en el cálculo del
+   %Cï¿½lculos que se realizan despuï¿½s de la convergencia del newton. Generalmente son cï¿½lculos
+   %correspondiente a la parte explï¿½cita del modelo y que se utiliza en el paso siguiente.
+   %Esta funciï¿½n se coloca despuï¿½s de la impresiï¿½n de resultados, ya que todo lo que se calcule en
+   %esta funciï¿½n se utiliza en el paso siguiente y por lo tanto no se utilizï¿½ en el cï¿½lculo del
    %paso actual.
-   %Si son operaciones que se utiliza para postproceso, como por ejemplo la tracción del elemento
-   %SDA, que debe ser impresa en el mismo paso, no debe colocarse acá, ya que sino la impresión
-   %estaría un paso atrasado.
+   %Si son operaciones que se utiliza para postproceso, como por ejemplo la tracciï¿½n del elemento
+   %SDA, que debe ser impresa en el mismo paso, no debe colocarse acï¿½, ya que sino la impresiï¿½n
+   %estarï¿½a un paso atrasado.
    
    %CRACK PATH FIELD EVALUATION
    if e_VG.exist_CrackPath

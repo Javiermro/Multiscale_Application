@@ -227,9 +227,9 @@ if esComplNumNod
    for iNod = 1:nnod
       conec(conec==in(iNod)) = iNod;
    end
-   fprintf('Tiempo de cambio de numeraci�n de nodos de la conectividad: %f\n',toc(ticIDCambNum));
+   fprintf('Tiempo de cambio de numeracion de nodos de la conectividad: %f\n',toc(ticIDCambNum));
 end
-fprintf('Tiempo total del cambio de numeraci�n reducido: %f\n',toc(ticIDCambNumRed));
+fprintf('Tiempo total del cambio de numeracion reducido: %f\n',toc(ticIDCambNumRed));
 
 %*******************************************************************************
 %* LISTA DE NODOS DE LA FRONTERA (Conectividades)                              *
@@ -1572,11 +1572,11 @@ for iSet = 1:nSet
       %LARGE DEFORMATIONS
       case {100,110}
       otherwise
-         error('Lectura de datos: Inicializaci�n variables: Modelo constitutivo no definido.')
+         error('Lectura de datos: Inicializacion variables: Modelo constitutivo no definido.')
    end
 
 end
-fprintf('Tiempo total de operaciones de pre-c�lculo en el preproceso: %f\n',toc(ticIDPreCalc))
+fprintf('Tiempo total de operaciones de pre-calculo en el preproceso: %f\n',toc(ticIDPreCalc))
 
 if e_VG.exist_CrackPath
    e_VG.smooth_alpha = zeros(nnod,1);

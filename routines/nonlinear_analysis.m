@@ -65,9 +65,8 @@ if e_VG.isMICRO.MICRO && ~isempty(e_VG.Snap)
     [dir,nomb] = fileparts(e_VG.fileCompleto);
     
     nglT = 0 ;
-    nset = e_VG.nSet ;
     ntens= e_VG.ntens ;  
-    for iset=1:nset
+    for iset=1:nSet
         nElemS = e_DatSet(iset).nElem ;
         npg    = e_DatSet(iset).e_DatElem.npg ;
         nglT   = nglT + nElemS*npg; %*ntens ;
@@ -84,10 +83,12 @@ if e_VG.isMICRO.MICRO && ~isempty(e_VG.Snap)
 %% PointersToSet es el puntero hacia cada subdominio (REG o DIS).
 %  Si hay mas Sets que subdominios hay que indicar a mano que set de EF
 %  corresponde a cada subdominio (JLM)
-    PointersToSet1 = true(nglT*ntens,1) ;
-    PointersToSet2 = false(nglT*ntens,1) ;
-
-    iSetDis = 2;
+    PointersToSet1 = true(nglT*ntens,1) ;   % Elementos del dominio regular
+    PointersToSet2 = false(nglT*ntens,1) ;  % Elementos del dominio singular
+    
+    iSetDis = 1;
+    if nSet>1; iSetDis = 2; end
+    
     % SOLO FUNCIONA CON 2 subdominios
     ind_elem_set = [] ;
 

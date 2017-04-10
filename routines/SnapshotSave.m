@@ -1,7 +1,7 @@
 function Snapshots = SnapshotSave(Snapshots,istep,e_VarAux,e_VarEst_new,e_DatSet,e_VG,nglT)
 % Funcion que guarda lo snapshot pedidos para cada paso equilibrado
 % nota solo para: e_VG.isMICRO.MICRO=1
-%                 eltype 108  %Cuadrángulo de 4 nodos FBar
+%                 eltype 108  %Cuadrï¿½ngulo de 4 nodos FBar
 % e_VG.Snap = vector binario que indica que snapshot debe guardarse
 
 if ~e_VG.isMICRO.MICRO
